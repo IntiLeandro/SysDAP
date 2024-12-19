@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Marcaciones>
+@{
+    var filtros = ViewBag.Filtros as MarcacionFiltro;
+}
+
+<h2>Reportes de Marcaciones</h2>
+<!-- Formulario de filtros -->
+@using (Html.BeginForm("Index", "Marcaciones", FormMethod.Get))
+{
+    <div>
+        <label>Empleado</label>
+        @Html.TextBox("EmpleadoID", filtros?.EmpleadoID, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Fecha Desde</label>
+        @Html.TextBox("FechaDesde", filtros?.FechaDesde?.ToString("yyyy-MM-dd"), new { @class = "form-control", type = "date" })
+    </div>
+    <div>
+        <label>Fecha Hasta</label>
+        @Html.TextBox("FechaHasta", filtros?.FechaHasta?.ToString("yyyy-MM-dd"), new { @class = "form-control", type = "date" })
+    </div>
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+}
+
+<hr />
+
+<!-- Mostrar resultados -->
+<h3>Resultados</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Empleado</th>
+            <th>Fecha</th>
+            <th>Hora Entrada</th>
+            <th>Hora Salida</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var marcaciones in Model)
+        {
+            <tr>
+                <td>@marcaciones.EmpleadoId</td>
+                <td>@marcaciones.Fecha</td>
+                <td>@marcaciones.HoraEntrada</td>
+                <td>@marcaciones.HoraSalida</td>
+            </tr>
+        }
+    </tbody>
+</table>

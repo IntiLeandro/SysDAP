@@ -1,0 +1,46 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Página Principal";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Hola, @User.Identity.Name. ¡Estás autenticado!</p>
+    <ul>
+        <li><a asp-controller="Empleados" asp-action="Index">Gestión de Docentes</a></li>
+        <li><a asp-controller="UsuarioApps" asp-action="Index">Gestión de Usuarios App Móvil</a></li>
+        <li><a asp-controller="Marcaciones" asp-action="Index">Reporte de Marcaciones</a></li>
+        <li><a asp-controller="Horas" asp-action="Index">Consultar Dias/Horas Trabajados</a>
+        </li>
+        <li>
+            <a asp-area="Identity" asp-page="/Account/Register">Gestion de Usuarios Web</a>
+        </li>
+    </ul>
+}
+else
+{
+    <p>No tienes permiso para ver este contenido. Por favor, <a asp-area="Identity" asp-page="/Account/Login">inicia sesión</a>.</p>
+}
+
+@* <div>
+    <h3>Opciones</h3>
+    <ul>
+        <li>
+            <a href="@Url.Action("Index", "Empleados")">Formulario Empleado</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "UsuarioApps")">Formulario UsuarioApp</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Marcaciones")">Reporte de Marcaciones</a>
+        </li>
+    </ul>
+</div> *@
+@* <div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+ *@

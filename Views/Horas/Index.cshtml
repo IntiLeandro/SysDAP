@@ -1,0 +1,48 @@
+﻿@using System.Globalization
+@model IEnumerable<HorasTrabajadasViewModel>
+
+@{
+    ViewData["Title"] = "Consulta de Días y Horas Trabajadas";
+}
+
+<h1>Consulta de Días y Horas Trabajadas</h1>
+
+<form asp-action="Index" method="post">
+    <div class="form-group">
+        <label for="mes">Mes:</label>
+        <select id="mes" name="mes" class="form-control">
+            @for (int i = 1; i <= 12; i++)
+            {
+                <option value="@i">@DateTimeFormatInfo.CurrentInfo.GetMonthName(i)</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="anio">Año:</label>
+        <input type="number" id="anio" name="anio" class="form-control" value="@DateTime.Now.Year" />
+    </div>
+    <button type="submit" class="btn btn-primary">Consultar</button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Empleado</th>
+                <th>Días Trabajados</th>
+                <th>Horas Trabajadas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.EmpleadoId</td>
+                    <td>@item.DiasTrabajados</td>
+                    <td>@item.HorasTrabajadas</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

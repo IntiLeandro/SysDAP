@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Pagina Principal";
+}
+
+@* <div>
+    <h1>Bienvenido a la Administración</h1>
+    <a asp-controller="Empleados" asp-action="Index" class="btn btn-primary">Gestión de Empleados</a>
+    <a asp-controller="UsuarioApps" asp-action="Index" class="btn btn-secondary">Gestión de Usuarios</a>
+    <a asp-controller="Marcaciones" asp-action="Index" class="btn btn-secondary">Gestión de Marcaciones</a>
+</div> *@
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Hola, @User.Identity.Name. ¡Estás autenticado!</p>
+    <ul>
+        <li><a asp-controller="Empleados" asp-action="Index">Gestión de Empleados</a></li>
+        <li><a asp-controller="UsuarioApps" asp-action="Index">Gestión de Usuarios en App Móvil</a></li>
+        <a asp-controller="Marcaciones" asp-action="Index">Gestión de Marcaciones</a>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Registrar Usuarios Web</a>
+        </li>
+    </ul>
+}
+else
+{
+    <p>No tienes permiso para ver este contenido. Por favor, <a asp-controller="Account" asp-action="Login">inicia sesión</a>.</p>
+}
